@@ -2,8 +2,9 @@ module.exports = function(app){
 
   const bcrypt = require('bcrypt');
     const saltRounds = 10;
+    const path = require('path');
   const MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost/";
+    const url = "mongodb+srv://TAX2310:cotch2310@cluster0.lsvo0.mongodb.net/HS?retryWrites=true&w=majority";
   const { check, validationResult } = require('express-validator');
 
 
@@ -34,7 +35,7 @@ module.exports = function(app){
     
         console.log(result_personal);
         if(result_personal != null || result_organisation != null){
-          res.render('create_account/personal.ejs', {error: 'one ore more field did not pass validation'});
+          res.render('create_account/personal.ejs', {error: 'username already in use'});
           client.close();
           return;
         };
@@ -49,7 +50,7 @@ module.exports = function(app){
         req.session.userId = req.body.usrName;
         req.session.accType = 'personal';
         client.close();
-        res.redirect('/personal/home.ejs');
+        res.render('/personal/home.ejs');
       });
     } 
   });
@@ -73,7 +74,7 @@ module.exports = function(app){
         var result_organisation = await db.collection('organisation').findOne({usrName: req.body.usrName});
         
         if(result_personal != null || result_organisation != null){
-          res.render('create_account/organisation.ejs', {error: 'one ore more field did not pass validation'});
+          res.render('create_account/organisation.ejs', {error: 'username already in use'});
           client.close();
           return;
         };
@@ -88,7 +89,7 @@ module.exports = function(app){
         req.session.userId = req.body.usrName;
         req.session.accType = 'organisation';
         client.close();
-        res.redirect('/personal/home.ejs');
+        res.render('organisation/home.ejs');
       });
     } 
   });

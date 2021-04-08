@@ -5,13 +5,14 @@ const validator = require ('express-validator');
 const flash = require('express-flash-notification');
 const expressSanitizer = require('express-sanitizer');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const app = express()
 const port = 8000
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
-    secret: 'somerandomstuffs',
+    secret: '2e62d371bf77b877f1d86cfb040f234cac7bbab0069775a1f88d9b081d181588df8c2143d8821404d1aa42336af58fd9c1164e23da143c32ea4a6c33d925fd367453c187adb6d1dba4ef5351404f7abb',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -22,6 +23,7 @@ app.use(session({
 app.use(cookieParser());
 app.use(expressSanitizer());
 app.use(flash(app));
+
 
 //main.js link
 require('./routes/main')(app);

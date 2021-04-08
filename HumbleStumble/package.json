@@ -18,7 +18,8 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.8.0",
     "mapbox-gl": "^1.13.0",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.3",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "webpack": "^5.10.0",

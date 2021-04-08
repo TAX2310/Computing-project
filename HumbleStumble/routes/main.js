@@ -4,7 +4,7 @@ module.exports = function(app){
   const bcrypt = require('bcrypt');
     const saltRounds = 10;
   const MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost/";
+    var url = "mongodb+srv://TAX2310:cotch2310@cluster0.lsvo0.mongodb.net/HS?retryWrites=true&w=majority";
   var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
   const redirectLogin = (req, res, next) => {
@@ -22,11 +22,12 @@ module.exports = function(app){
     if (!req.session.userId) {
       res.render('index.ejs')
     } else if (req.session.userId == 'personal') {
-      res.render('/personal/home.ejs')
+      res.render('personal/home.ejs')
     } else {
-      res.render('/organisation/home.ejs')
+      res.render('organisation/home.ejs')
     }
   });
+
 
 	// about page
 	app.get('/about', function(req,res){

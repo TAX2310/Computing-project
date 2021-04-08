@@ -3,7 +3,7 @@ module.exports = function(app){
 	const bcrypt = require('bcrypt');
     	const saltRounds = 10;
   	const MongoClient = require('mongodb').MongoClient;
-    	var url = "mongodb://localhost/";
+    	var url = "mongodb+srv://TAX2310:cotch2310@cluster0.lsvo0.mongodb.net/HS?retryWrites=true&w=majority";
 
   	const redirectLogin = (req, res, next) => {
     	if (!req.session.userId ) {
@@ -21,9 +21,9 @@ module.exports = function(app){
 
 		if (req.session.userId != null) {
 			if (req.session.accType == 'personal') {
-				res.send("You are already logged in <br />"+'<a href='+'/personal/home.ejs'+'>Home</a>');
+				res.send("You are already logged in <br />"+'<a href=/'+'>Home</a>');
 			} else {
-				res.send("You are already logged in <br />"+'<a href='+'/organisation/home.ejs'+'>Home</a>');
+				res.send("You are already logged in <br />"+'<a href=/'+'>Home</a>');
 			}
 			
 			return;
@@ -44,7 +44,7 @@ module.exports = function(app){
 					if (result == true) {
 	              		req.session.userId = req.body.usrName;
 	              		req.session.accType = 'personal';
-	              		res.redirect('/personal/home.ejs');
+	              		res.render('personal/home.ejs');
 	            	}
 				});
 	      	} else if (organisation_login != null) {
@@ -54,7 +54,7 @@ module.exports = function(app){
 	              		req.session.userId = req.body.usrName;
 	              		req.session.accType = 'organisation';
 	              		console.log(req.session.accType);
-	              		res.redirect('/organisation/home.ejs');
+	              		res.render('organisation/home.ejs');
 	            	}
 				});
 	      	} else {
